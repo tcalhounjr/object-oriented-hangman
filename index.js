@@ -27,7 +27,6 @@ function manageGame (game) {
 
 
 
-
     console.log("==============================================");
 
     
