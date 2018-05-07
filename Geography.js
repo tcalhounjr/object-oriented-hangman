@@ -32,7 +32,7 @@ class Geography extends Game {
         this.maxGuesses = 10;
         $(guessesLeft).text(this.maxGuesses);
         this.cpuGuess = getCPUGuess(0,this.gameArray.length,this.gameArray);
-        createBoard(this.cpuGuess);
+        this.createBoard(this.cpuGuess);
         this.lettersAvail = this.cpuGuess.length - numSpaces;
         this.initializeBoardArray();
     }
@@ -57,10 +57,16 @@ class Geography extends Game {
     }
 }
 
+module.exports = Geography;
 
-const thomas = new Geography('geography');
-const array = thomas.getGameArray();
 
-console.log(newGame);
-console.log(array);
-console.log(thomas);
+// const thomas = new Geography('geography');
+// const array = thomas.getGameArray();
+
+// let index = thomas.getRandomInt(0,array.length);
+// let word = array[index];
+
+// console.log(newGame);
+// console.log(array);
+// console.log(thomas);
+// console.log('this is your word: ',word);

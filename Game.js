@@ -6,9 +6,9 @@ class Game {
         this.numWins = 0;
         this.numLosses = 0;
         this.lettersAvail = 0;
-        this.cpuGuess = [];
+        this.cpuGuess = '';
         this.guesses = [];
-        this.boardArray = [];
+        this.boardStr = '';
         this.gameArray = [];
         this.selectedGame = gameType;
     }
@@ -44,13 +44,13 @@ class Game {
     }
 
     selectWordArray(game) {
-        if (game === 'geography') {
+        if (game === 'Geography') {
             this.gameArray = ["SENEGAL", "GUINEA", "SIERRA LEONE", "IVORY COAST", "GHANA", "MAURITANIA", "BURKINA", "NIGER", "NIGERIA", "CHAD", "MALI", "WESTERN SAHARA", 
             "MOROCCO", "ALGERIA", "TUNISIA", "LIBYA", "EGYPT", "SUDAN", "ETHIOPIA", "SOMALIA", "KENYA", "UGANDA", "DEMOCRATIC REPUBLIC OF THE CONGO",
             "CENTRAL AFRICAN REPUBLIC", "CAMEROON", "CONGO", "GABON", "TANZANIA", "MALAWI", "ZAMBIA", "ANGOLA", "NAMIBIA", "BOTSWANA", "ZIMBABWE", 
             "MOZAMBIQUE","MADAGASCAR", "SOUTH AFRICA"];
         }
-        else if (game === 'nintendo') {
+        else if (game === 'Nintendo') {
             this.gameArray = ["RING KING", "TECMO BOWL", "TECMO SUPER BOWL", "EXCITEBIKE", "BASES LOADED", "ARCH RIVALS", "DOUBLE DRIBBLE", "BLADES OF STEEL",
             "RBI BASEBALL", "PUNCH OUT", "SUPER MARIO", "TETRIS", "DONKEY KONG", "LEGEND OF ZELDA", "CONTRA", "KID ICARUS", "STREET FIGHTER", 
             "NINJA GAIDEN", "KUNG FU", "BATMAN", "DOUBLE DRAGON", "RC PRO AM", "MEGA MAN"]
@@ -60,35 +60,36 @@ class Game {
     }
 
     createBoard (randomPhrase) {
+        let numSpaces = 0;
         for (var i = 0; i < randomPhrase.length; i++) { 
             if (randomPhrase[i] === " ") {
-                $(blanks).append("&nbsp;&nbsp;&nbsp;");
+                this.boardStr += randomPhrase[i] + ' ';
                 numSpaces++
             }
             else {
-                $(blanks).append("- &nbsp;");
+                this.boardStr += '- ';
             }
         }
+        console.log(this.boardStr);
     }
 
     updateBoard (occurrenceArray, correctLetter) {
         for (var i = 0; i < occurrenceArray.length; i++) {
-            this.boardArray[occurrenceArray[i]] = correctLetter;
+            this.boardStr.charAt(occurrenceArray[i]) = correctLetter;
         }
-        $(blanks).html(this.boardArray.join(" "));
+        console.log(this.boardStr);
     }
 
-    goodGuess(newGuess, randomWord) {   
-        var letterOccurrences = [];
+    goodGuess (newGuess, randomWord) {   
+        let letterOccurrences = [];
         for (var i = 0; i < randomWord.length; i++){
-            if (newGuess === randomWord[i]){
+            if (newGuess === randomWord.charAt(i)){
                 letterOccurrences.push(i); //push the indices of all the correctly-guessed letter occurences
             }
         }
         if (letterOccurrences.length > 0) {
-            updateBoard(letterOccurrences, newGuess);
+            this.updateBoard(letterOccurrences, newGuess);
         }
-        return letterOccurrences;
     }//Take in user input; compare it to the computer's guess; return true if it's correct; return false if not.
 }
 
