@@ -32,7 +32,7 @@ class Nintendo extends Game {
         this.maxGuesses = 10;
         $(guessesLeft).text(this.maxGuesses);
         this.cpuGuess = getCPUGuess(0,this.gameArray.length,this.gameArray);
-        createBoard(this.cpuGuess);
+        this.createBoard(this.cpuGuess);
         this.lettersAvail = this.cpuGuess.length - numSpaces;
         this.initializeBoardArray();
     }

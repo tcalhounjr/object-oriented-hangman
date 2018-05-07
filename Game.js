@@ -9,6 +9,7 @@ class Game {
         this.cpuGuess = '';
         this.guesses = [];
         this.boardStr = '';
+        this.boardArray = [];
         this.gameArray = [];
         this.selectedGame = gameType;
     }
@@ -62,22 +63,23 @@ class Game {
     createBoard (randomPhrase) {
         let numSpaces = 0;
         for (var i = 0; i < randomPhrase.length; i++) { 
-            if (randomPhrase[i] === " ") {
-                this.boardStr += randomPhrase[i] + ' ';
+            if (randomPhrase.charAt(i) === " ") {
+                this.boardArray.push(' ');
                 numSpaces++
             }
             else {
-                this.boardStr += '- ';
+                this.boardArray.push('- ');
             }
         }
-        console.log(this.boardStr);
+        console.log(this.boardArray.join(' '));
     }
 
     updateBoard (occurrenceArray, correctLetter) {
         for (var i = 0; i < occurrenceArray.length; i++) {
-            this.boardStr.charAt(occurrenceArray[i]) = correctLetter;
+            console.log(occurrenceArray[i]);
+            this.boardArray[occurrenceArray[i]] = correctLetter;
         }
-        console.log(this.boardStr);
+        console.log(this.boardArray.join(' '));
     }
 
     goodGuess (newGuess, randomWord) {   
@@ -88,6 +90,7 @@ class Game {
             }
         }
         if (letterOccurrences.length > 0) {
+            this.lettersAvail -= letterOccurrences.length;
             this.updateBoard(letterOccurrences, newGuess);
         }
     }//Take in user input; compare it to the computer's guess; return true if it's correct; return false if not.

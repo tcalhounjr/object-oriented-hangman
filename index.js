@@ -5,33 +5,31 @@ const Nintendo = require('./Nintendo.js');
 
 function manageGame (game) {
 
-    const array = game.getGameArray();
-    let index = game.getRandomInt(0,array.length);
-    let word = array[index];
-    game.lettersAvail = word.length;
+  const array = game.getGameArray();
+  let index = game.getRandomInt(0,array.length);
+  let word = array[index];
+  game.lettersAvail = word.length;
 
-    console.log("==============================================");
-    console.log('this is your word: ', word);
-    game.createBoard(word);
-   
-      inquirer.prompt([
-          {
-            type: "input",
-            name: "letter",
-            message: "Guess a letter!"
-          }
-      ]).then(function(user) {
-        console.log(user.letter.toUpperCase());
-        game.goodGuess(user.letter.toUpperCase(), word);
-      })
-
-
-
-    console.log("==============================================");
-
+  console.log("==============================================");
+  console.log('this is your word: ', word);
+  console.log('is the puzzle solved ', game.puzzleSolved());
+  game.createBoard(word);
+  promptUserForGuess(word, game);
     
 }
 
+function promptUserForGuess(word, game) {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "letter",
+      message: "Guess a letter!"
+    }
+  ]).then(function(user) {
+    console.log(user.letter.toUpperCase());
+    game.goodGuess(user.letter.toUpperCase(), word);
+  })
+}
 // Created a series of questions
 inquirer.prompt([
 
