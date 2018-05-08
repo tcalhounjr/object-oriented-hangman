@@ -71,6 +71,8 @@ class Game {
                 this.boardArray.push('- ');
             }
         }
+        this.lettersAvail = randomPhrase.length - numSpaces;
+        console.log('you have ', this.lettersAvail, ' letters left');
         console.log(this.boardArray.join(' '));
     }
 
@@ -79,6 +81,7 @@ class Game {
             console.log(occurrenceArray[i]);
             this.boardArray[occurrenceArray[i]] = correctLetter;
         }
+        console.log('you have ', this.lettersAvail, ' letters left');
         console.log(this.boardArray.join(' '));
     }
 

@@ -17,9 +17,6 @@ class Geography extends Game {
         this.cpuGuess = getCPUGuess(0,this.gameArray.length,this.gameArray);
         console.log("there are " + this.cpuGuess.length + " letters in the random word");
         createBoard(this.cpuGuess);
-        this.lettersAvail = this.cpuGuess.length - numSpaces;
-        console.log("you have " + this.lettersAvail + " letters remaining at the beginning");
-        this.initializeBoardArray();
     }
 
     playAgain() {
@@ -33,13 +30,13 @@ class Geography extends Game {
         $(guessesLeft).text(this.maxGuesses);
         this.cpuGuess = getCPUGuess(0,this.gameArray.length,this.gameArray);
         this.createBoard(this.cpuGuess);
-        this.lettersAvail = this.cpuGuess.length - numSpaces;
-        this.initializeBoardArray();
     }
 
     puzzleSolved() {
         if (this.lettersAvail === 0) {
             this.numWins++;
+            console.log(this.setScore());
+            return true;
             // writeToScreen(userWins,this.numWins);
             // writeToScreen(cpuWord,this.cpuGuess);
             
